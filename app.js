@@ -401,7 +401,7 @@ function initMap() {
         });
     }
 
-    if (drawHistory) {
+    if (showHistory) {
         pubnub.history({
             channel: channelName,
             count: 50,
