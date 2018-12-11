@@ -1,0 +1,100 @@
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/*
+Meeting.css 
+*/
+
+#offset {
+    top: 100px;
+    margin-top: 10%;
+}
+
+#map {
+    top: 50px;
+    position: relative;
+    display: block;
+    height: 80vh;
+    border-radius: 20px;
+}
+
+/*
+index.html
+*/
+
+
+#pseudo-nav {
+    margin-top: 10px;
+    font-family: "Amarnath", sans-serif;
+}
+
+#pseudo-nav ul>li {
+    display: inline;
+    margin: 20px;
+    font-size: 2vh;
+}
+
+#pseudo-nav ul>li:hover a {
+    color: black;
+}
+
+#title>h1 {
+    font-size: 5vh;
+}
+
+
+img.responsive-img {
+    height: 40vh;
+}
+
+.img_about {
+    border-radius: 20px;
+}
+
+#group_add {
+    height: 40vh;
+    margin-right: auto;
+}
+
+/* Add Viewers */
+
+.anim {
+    transform: scale(1.5);
+}
+
+#viewerBlock {
+    float: left;
+}
+
+.viewerCount {
+    -webkit-transition: all .5s;
+    transition: all .5s;
+}
+
+.viewerCount {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    min-width: 48px;
+    height: 48px;
+    padding: .3em;
+    display: inline-block;
+    border-radius: 8px;
+    line-height: .9em;
+    color: #fff;
+    text-align: center;
+    background: #0142a3;
+}
+
+.viewerCount span {
+    display: block;
+    margin: 5px auto;
+    font-size: 10px;
+}
+
+.viewerCount #occupancy {
+    font-size: 32px;
+}

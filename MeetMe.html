@@ -1,0 +1,68 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Amaranth|Raleway|Poor+Story|K2D" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="./assets/style.css" rel="stylesheet" />
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col s12 m6 l6" id="offset">
+                <div class="row">
+                    <div class="viewerCount" id="viewerBlock">
+                        <span id="occupancy">0</span>
+                        <span id="unit">Viewers</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <i class="material-icons prefix">person_add</i>
+                        <input type="text" id="autocomplete-input" class="autocomplete">
+                        <button class="btn-floating " id="add_person"><i class="material-icons ">add</i></button>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <ul style="list-style-type:square" id="online_people">
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="col s12 m6 l6" id="map"></div>
+        </div>
+    </div>
+    <!-- PUBNUB -->
+    <script>
+        var drawHistory = true;
+    </script>
+
+    <script src="//cdn.pubnub.com/pubnub-3.14.1.min.js"></script>
+    <!-- <script src="../js/app.min.js"></script> -->
+
+    <script src="./app.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwAdfRMQoKv8Tmc4iD2KsDCXQfWoxVJkk&libraries=places&callback=initMap"
+        async defer></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/geocomplete/1.7.0/jquery.geocomplete.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+
+</body>
+
+</html>

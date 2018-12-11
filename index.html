@@ -1,0 +1,68 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Meet In The Middle </title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous" />
+    <!-- edit this out -->
+    <link href="https://fonts.googleapis.com/css?family=Amaranth|Raleway|Poor+Story|K2D" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="./assets/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container center" id="pseudo-nav">
+        <ul>
+            <li> <a href=""><b> About </b></a></li>
+            <li> <a href=""><b> Contact Us </b></a></li>
+            <li> <a href=""><b> Meet </b></a></li>
+        </ul>
+    </div>
+
+    <div class="container" id="title">
+        <h1 class="indigo-text center"> Meet In The Middle </h1>
+    </div>
+
+    <br>
+
+    <div class="container" id="main">
+        <div class="row">
+            <div class="col s12 m4 l4  offset-l2 valign-wrapper" id="group_add">
+                <input type="text" id="group_name" placeholder="Group Name">
+                <button class="btn-floating round waves-effect waves-light " type="submit" id="submit">
+                    <i class="material-icons right">send</i>
+                </button>
+            </div>
+            <div class="col s12 m6 l6 right-align" id="map_place">
+                <img class="responsive-img img_about materialboxed" src="https://www.tandemmadrid.com/tandem/wp-content/uploads/2015/11/map-map-marker-icon.png">
+            </div>
+        </div>
+    </div>
+    <script>
+        var arrow = document.getElementById('submit');
+
+        function genGroupID(name) {
+            return name + "123";
+        }
+
+        arrow.onclick = function () {
+            console.log("HEY");
+            var groupName = document.getElementById('group_name').value;
+            var groupID = genGroupID(groupName);
+
+            // localStorage.setItem("groupID", groupID);
+
+            window.location = './MeetMe.html?username=' + groupID;
+        }
+    </script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+
+</html>
