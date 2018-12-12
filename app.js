@@ -33,7 +33,7 @@ function initMap() {
     function clearMap() {
         map = new google.maps.Map(
             document.getElementById('map'), {
-                zoom: 8,
+                zoom: 3,
                 mapTypeControl: false,
                 styles: [{
                     "featureType": "administrative.country",
@@ -54,8 +54,7 @@ function initMap() {
     }
 
     clearMap();
-    // The marker, positioned at Uluru
-    console.log("Map Rendered ");
+    console.log("Map Rendered !");
 
 
     var groupCoordinates = [],
@@ -63,7 +62,7 @@ function initMap() {
         centroid, centroidMarker, allMarkers = [];
 
     var RADIUS_SPAN = 1500,
-        MAX_PLACES = 2;
+        MAX_PLACES = 3;
 
     // DOM DEFNS ;
     var add_people = document.getElementById('add_people');
@@ -80,7 +79,6 @@ function initMap() {
     var objLocation;
     google.maps.event.addListener(autocomplete_one, 'place_changed', function () {
         objLocation = autocomplete_one.getPlace();
-        console.log(objLocation);
     });
 
     var infowindow = new google.maps.InfoWindow({
@@ -96,7 +94,6 @@ function initMap() {
 
         if (n_cords > 1) {
             console.log("Getting Centroid..");
-            console.log("DATA POINTS", groupCoordinates);
 
             var bounds = new google.maps.LatLngBounds();
 
@@ -154,7 +151,7 @@ function initMap() {
             console.log("ONLY SINGLE COORDINATES ");
 
         } else {
-            console.log("LESS COORDINATES ");
+            console.log("NO COORDINATES ;( ");
         }
     }
 
@@ -181,19 +178,18 @@ function initMap() {
                         }
 
                         toggleBounce();
-                        console.log(results[0] + "INSIDE REVERSE GEOCODING ");
+                        // console.log(results[0] + "INSIDE REVERSE GEOCODING ");
                         infowindow.setContent("<b>" + results[0].formatted_address + "<hr>" + "<a href='http://www.google.com/maps/place/" + point.lat + "," + point.lng + "' target='_blank'> Get Direction > </a></b>");
                         infowindow.open(map, markerR);
                         setTimeout(toggleBounce, 1500);
                     });
 
                 } else {
-                    window.alert('No results found');
+                    console.log('No results found');
                 }
             } else {
 
                 console.log('Geocoder failed due to: ' + status);
-
             }
         });
     }
@@ -341,13 +337,12 @@ function initMap() {
 
     function addPeople() {
         if (objLocation.formatted_address) {
-            console.log(objLocation.formatted_address, objLocation);
+            // console.log(objLocation.formatted_address, objLocation);
 
             cord = {
                 lat: objLocation.geometry.location.lat(),
                 lng: objLocation.geometry.location.lng(),
             }
-            console.log(cord);
             peoplePlacesName.push(objLocation.formatted_address);
             groupCoordinates.push(cord);
             n_cords += 1;
@@ -367,7 +362,7 @@ function initMap() {
                 updateView();
             }
 
-            console.log("ADDED");
+            console.log("LOCATION ADDED !");
         }
         locationInput.value = "";
     }
@@ -420,7 +415,6 @@ function initMap() {
         var people = document.getElementById("online_people"),
             li;
         people.innerHTML = '';
-        console.log(groupCoordinates);
         for (i = 0; i < n_cords; i++) {
             li = document.createElement("li");
             var name = peoplePlacesName[i]

@@ -29,3 +29,5 @@
 - Share link with friends
 - Now all your friends share same view via [interweb](https://www.pubnub.com/) 🎉
 - Find places to meet 😛
+
+> Exhaustive List of TODO [here](./TODO.md)
