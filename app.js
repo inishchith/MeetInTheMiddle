@@ -1,11 +1,7 @@
 var channelName = location.search.split('username=')[1]
 if (!channelName) {
-    alert("Do Not Cheat REDIRECTING... :P")
+    alert("Du U Kno Da Wae REDIRECTING... :P")
     history.go(-1);
-} else {
-    console.log("You're Welcome");
-    console.log(channelName);
-
 }
 
 var pubnub = PUBNUB.init({
@@ -23,15 +19,15 @@ function initMap() {
     var markerIcon = {
         url: './assets/icons/marker.png',
         scaledSize: new google.maps.Size(40, 40),
-        origin: new google.maps.Point(0, 0), 
-        anchor: new google.maps.Point(20, 40) 
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(20, 40)
     };
 
     var centroidIcon = {
         url: './assets/icons/centroid.png',
         scaledSize: new google.maps.Size(40, 40),
-        origin: new google.maps.Point(0, 0), 
-        anchor: new google.maps.Point(20, 40) 
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(20, 40)
     };
 
     function clearMap() {
@@ -54,10 +50,8 @@ function initMap() {
                     lat: 19.073,
                     lng: 72.899
                 },
-                //mapTypeId: google.maps.MapTypeId.ROADMAP
             });
     }
-    // alert(localStorage.getItem("groupID"));
 
     clearMap();
     // The marker, positioned at Uluru
@@ -118,7 +112,6 @@ function initMap() {
                 bounds.extend(polygonCoords[i]);
             }
 
-            // // The Center of the Bermuda Triangle - (25.3939245, -72.473816)
             centroid = {
                 lat: bounds.getCenter().lat(),
                 lng: bounds.getCenter().lng()
@@ -136,7 +129,6 @@ function initMap() {
                 labelInBackground: false,
                 fillColor: '#000000',
                 icon: centroidIcon
-                // icon: pinImage
             });
             allMarkers.push(centroidMarker);
 
@@ -148,7 +140,6 @@ function initMap() {
             map.setZoom(13);
             map.setCenter(new google.maps.LatLng(centroid.lat, centroid.lng));
 
-
             var circle = new google.maps.Circle({
                 strokeColor: '#FF0000',
                 strokeOpacity: 0,
@@ -158,9 +149,9 @@ function initMap() {
                 center: new google.maps.LatLng(centroid.lat, centroid.lng),
                 radius: RADIUS_SPAN
             });
+
         } else if (n_cords == 1) {
             console.log("ONLY SINGLE COORDINATES ");
-            // : SHOW NEARBY THOUGH 
 
         } else {
             console.log("LESS COORDINATES ");
@@ -169,8 +160,8 @@ function initMap() {
 
     var geocoder = new google.maps.Geocoder;
 
-    // REVERSE GEOCODING
 
+    // REVERSE GEOCODING
     function reverse_geocoding(point, markerR) {
 
         geocoder.geocode({
@@ -181,7 +172,6 @@ function initMap() {
                 if (results[0]) {
                     google.maps.event.addListener(markerR, 'click', function () {
 
-                        //TIME PASS
                         function toggleBounce() {
                             if (markerR.getAnimation() != null) {
                                 markerR.setAnimation(null);
@@ -192,7 +182,6 @@ function initMap() {
 
                         toggleBounce();
                         console.log(results[0] + "INSIDE REVERSE GEOCODING ");
-                        // infowindow.setContent("<b>" + results[0].name + "</b> <hr>" + results[0].vicinity);
                         infowindow.setContent("<b>" + results[0].formatted_address + "<hr>" + "<a href='http://www.google.com/maps/place/" + point.lat + "," + point.lng + "' target='_blank'> Get Direction > </a></b>");
                         infowindow.open(map, markerR);
                         setTimeout(toggleBounce, 1500);
@@ -208,7 +197,6 @@ function initMap() {
             }
         });
     }
-
 
     // DRAW MARKERS FOR MIDWAY & POINTS 
     function drawMarkers() {
@@ -226,7 +214,6 @@ function initMap() {
             reverse_geocoding(groupCoordinates[i], cord_marker);
             allMarkers.push(cord_marker);
         }
-
         // reverse_geocoding(centroid, centroidMarker);
     }
 
@@ -266,6 +253,7 @@ function initMap() {
             });
         }
     }
+
     // PLACES SEARCH 
     function addNearbyServices() {
         if (n_cords < 1)
@@ -287,21 +275,21 @@ function initMap() {
         function createMarker(place) {
             var placeData = "<b>" + place.name + "</b> <hr>";
             if (place.photos != undefined) {
-                placeData+= "<img src='" + place.photos[0].getUrl({
-                        'maxWidth': 200,
-                        'maxHeight': 200
-                    }) + "' />";
+                placeData += "<img src='" + place.photos[0].getUrl({
+                    'maxWidth': 200,
+                    'maxHeight': 200
+                }) + "' />";
             }
 
             if (place.rating != undefined) {
-                placeData += " Rating : " + place.rating+"<hr>";
+                placeData += " Rating : " + place.rating + "<hr>";
             }
 
             var placeLoc = place.geometry.location;
 
             icon = {
-                url: place.icon, // url
-                scaledSize: new google.maps.Size(30, 30), 
+                url: place.icon,
+                scaledSize: new google.maps.Size(30, 30),
             };
 
             var marker = new google.maps.Marker({
@@ -311,7 +299,7 @@ function initMap() {
                 animation: google.maps.Animation.DROP,
             });
 
-            placeData +=  place.vicinity + "<hr>" + "<a href='http://www.google.com/maps/place/" + placeLoc.lat() + "," + placeLoc.lng() + "' target='_blank'> Get Direction > </a></b>";
+            placeData += place.vicinity + "<hr>" + "<a href='http://www.google.com/maps/place/" + placeLoc.lat() + "," + placeLoc.lng() + "' target='_blank'> Get Direction > </a></b>";
 
             google.maps.event.addListener(marker, 'click', function () {
                 infowindow.setContent(placeData);
@@ -373,6 +361,7 @@ function initMap() {
                 });
 
                 allMarkers.push(newMarker);
+                map.setCenter(new google.maps.LatLng(cord.lat, cord.lng));
             } else {
                 clearMap();
                 updateView();
@@ -418,6 +407,7 @@ function initMap() {
         CloseBar.style.display = "none";
         OpenBar.style.display = "";
     }
+
     //OPEN BAR
     OpenBar.onclick = function () {
         ResultBar.style.display = "";
@@ -439,7 +429,6 @@ function initMap() {
                 name = name.substring(0, 30);
                 name += " ..";
             }
-
             li.innerHTML = "<p> <i class='material-icons green-text inline-icon'>adjust</i>" + name + "  </p>"
             people.appendChild(li);
         }
@@ -460,7 +449,6 @@ function initMap() {
     }
 
     /* PUBNUB */
-
     pubnub.subscribe({
         channel: channelName,
         callback: publishedData,
