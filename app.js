@@ -23,16 +23,16 @@ function initMap() {
     var markerIcon = {
         url: './assets/icons/marker.png',
         scaledSize: new google.maps.Size(40, 40),
-        origin: new google.maps.Point(0, 0), // used if icon is a part of sprite, indicates image position in sprite
-        anchor: new google.maps.Point(20,40) // lets offset the marker image
-      };
+        origin: new google.maps.Point(0, 0), 
+        anchor: new google.maps.Point(20, 40) 
+    };
 
-      var centroidIcon = {
+    var centroidIcon = {
         url: './assets/icons/centroid.png',
         scaledSize: new google.maps.Size(40, 40),
-        origin: new google.maps.Point(0, 0), // used if icon is a part of sprite, indicates image position in sprite
-        anchor: new google.maps.Point(20,40) // lets offset the marker image
-      };
+        origin: new google.maps.Point(0, 0), 
+        anchor: new google.maps.Point(20, 40) 
+    };
 
     function clearMap() {
         map = new google.maps.Map(
@@ -69,7 +69,7 @@ function initMap() {
         centroid, centroidMarker, allMarkers = [];
 
     var RADIUS_SPAN = 1500,
-        MAX_PLACES = 3;
+        MAX_PLACES = 2;
 
     // DOM DEFNS ;
     var add_people = document.getElementById('add_people');
@@ -135,7 +135,7 @@ function initMap() {
                 labelContent: "YOUR MIDWAY",
                 labelInBackground: false,
                 fillColor: '#000000',
-                icon:centroidIcon
+                icon: centroidIcon
                 // icon: pinImage
             });
             allMarkers.push(centroidMarker);
@@ -203,7 +203,7 @@ function initMap() {
                 }
             } else {
 
-                window.alert('Geocoder failed due to: ' + status);
+                console.log('Geocoder failed due to: ' + status);
 
             }
         });
@@ -219,7 +219,7 @@ function initMap() {
             var cord_marker = new google.maps.Marker({
                 position: start,
                 map: map,
-                icon:markerIcon,
+                icon: markerIcon,
                 animation: google.maps.Animation.DROP,
             });
 
@@ -285,13 +285,23 @@ function initMap() {
         var icon;
 
         function createMarker(place) {
+            var placeData = "<b>" + place.name + "</b> <hr>";
+            if (place.photos != undefined) {
+                placeData+= "<img src='" + place.photos[0].getUrl({
+                        'maxWidth': 200,
+                        'maxHeight': 200
+                    }) + "' />";
+            }
+
+            if (place.rating != undefined) {
+                placeData += " Rating : " + place.rating+"<hr>";
+            }
+
             var placeLoc = place.geometry.location;
 
             icon = {
                 url: place.icon, // url
-                scaledSize: new google.maps.Size(30, 30), // scaled size
-                // origin: new google.maps.Point(0,0), // origin
-                // anchor: new google.maps.Point(0, 0) // anchor
+                scaledSize: new google.maps.Size(30, 30), 
             };
 
             var marker = new google.maps.Marker({
@@ -300,8 +310,11 @@ function initMap() {
                 icon: icon,
                 animation: google.maps.Animation.DROP,
             });
+
+            placeData +=  place.vicinity + "<hr>" + "<a href='http://www.google.com/maps/place/" + placeLoc.lat() + "," + placeLoc.lng() + "' target='_blank'> Get Direction > </a></b>";
+
             google.maps.event.addListener(marker, 'click', function () {
-                infowindow.setContent("<b>" + place.name + "</b> <hr>" + place.vicinity + "<hr>" + "<a href='http://www.google.com/maps/place/" + placeLoc.lat() + "," + placeLoc.lng() + "' target='_blank'> Get Direction > </a></b>");
+                infowindow.setContent(placeData);
                 infowindow.open(map, marker);
             });
 
@@ -310,9 +323,7 @@ function initMap() {
         function callback(results, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 for (i = 0; i < Math.min(MAX_PLACES, results.length); i++) {
-                    // console.log(results[i]);
                     createMarker(results[i]);
-                    // reverse_geocoding(cords[i], cord_marker);
                 }
             }
         }
@@ -342,8 +353,8 @@ function initMap() {
 
     function addPeople() {
         if (objLocation.formatted_address) {
-            console.log(objLocation.formatted_address,objLocation);
-            
+            console.log(objLocation.formatted_address, objLocation);
+
             cord = {
                 lat: objLocation.geometry.location.lat(),
                 lng: objLocation.geometry.location.lng(),
@@ -352,8 +363,6 @@ function initMap() {
             peoplePlacesName.push(objLocation.formatted_address);
             groupCoordinates.push(cord);
             n_cords += 1;
-            // console.log(objLocation.formatted_address+" HEY");
-
 
             if (n_cords == 1) {
 
@@ -362,8 +371,6 @@ function initMap() {
                     map: map,
                     animation: google.maps.Animation.DROP,
                 });
-
-                // reverse_geocoding(cord, newMarker);
 
                 allMarkers.push(newMarker);
             } else {
@@ -385,7 +392,7 @@ function initMap() {
         publish({
             n_points: n_cords,
             points: groupCoordinates,
-            placeNames:peoplePlacesName
+            placeNames: peoplePlacesName
         });
     }
 
@@ -399,20 +406,20 @@ function initMap() {
         publish({
             n_points: n_cords,
             points: groupCoordinates,
-            placeNames:peoplePlacesName
+            placeNames: peoplePlacesName
         });
         clearMap();
         location.reload();
     }
 
     // CLOSE BAR
-    CloseBar.onclick = function(){
+    CloseBar.onclick = function () {
         ResultBar.style.display = "none";
         CloseBar.style.display = "none";
         OpenBar.style.display = "";
     }
     //OPEN BAR
-    OpenBar.onclick = function(){
+    OpenBar.onclick = function () {
         ResultBar.style.display = "";
         CloseBar.style.display = "";
         OpenBar.style.display = "none";
@@ -427,13 +434,13 @@ function initMap() {
         for (i = 0; i < n_cords; i++) {
             li = document.createElement("li");
             var name = peoplePlacesName[i]
-            var len = peoplePlacesName[i].length ;
-            if(len > 30){
-                name = name.substring(0,30);
+            var len = peoplePlacesName[i].length;
+            if (len > 30) {
+                name = name.substring(0, 30);
                 name += " ..";
             }
-            
-            li.innerHTML = "<p> <i class='material-icons green-text inline-icon'>adjust</i>" + name +"  </p>"
+
+            li.innerHTML = "<p> <i class='material-icons green-text inline-icon'>adjust</i>" + name + "  </p>"
             people.appendChild(li);
         }
     }
@@ -458,8 +465,7 @@ function initMap() {
         channel: channelName,
         callback: publishedData,
         presence: function (m) {
-           if (m.occupancy ) {
-                // document.getElementById('unit').textContent = 'Viewers';
+            if (m.occupancy) {
                 document.getElementById('unit').innerHTML = "<i class='material-icons'>person</i>";
             }
             document.getElementById('occupancy').textContent = m.occupancy;
