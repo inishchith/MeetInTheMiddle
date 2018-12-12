@@ -14,12 +14,91 @@ Meeting.css
 }
 
 #map {
-    top: 50px;
-    position: relative;
-    display: block;
-    height: 80vh;
-    border-radius: 20px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: -200px;
+    left: 0;
+    right: 0;
+    z-index: 0;
 }
+
+
+#ResultBar {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    background: rgba(255, 255, 255, 0.68);
+    border-radius: 10px;
+}
+
+@media only screen and (max-width:650px) {
+    .results-box {
+        position: block;
+        left: 15px;
+        top: 15px;
+        width: 50%;
+        background: rgba(255, 255, 255, 0.68);
+        border-radius: 10px;
+    }
+}
+
+.inline-icon {
+    vertical-align: bottom;
+    font-size: 1.5em !important;
+}
+
+.row {
+    padding: 10px;
+}
+
+.views {
+    float: left;
+}
+
+/* Add Viewers */
+
+.anim {
+    transform: scale(1.5);
+}
+
+#viewerBlock {
+
+    float: left;
+    left: 20px;
+}
+
+.viewerCount {
+    -webkit-transition: all .5s;
+    transition: all .5s;
+}
+
+.viewerCount {
+    position: relative;
+    top: 20px;
+    right: 20px;
+    min-width: 40px;
+    height: 40px;
+    padding: .3em;
+    display: inline-block;
+    border-radius: 8px;
+    line-height: 1em;
+    color: #fff;
+    text-align: center;
+    background: #2979ff;
+    /* border-radius: 20px; */
+}
+
+.viewerCount span {
+    display: block;
+    margin: 5px auto;
+    font-size: 10px;
+}
+
+.viewerCount #occupancy {
+    font-size: 32px;
+}
+
 
 /*
 index.html
@@ -42,6 +121,8 @@ index.html
 }
 
 #title>h1 {
+    margin-top: 10vh;
+    margin-bottom: 2vh;
     font-size: 5vh;
 }
 
@@ -57,44 +138,4 @@ img.responsive-img {
 #group_add {
     height: 40vh;
     margin-right: auto;
-}
-
-/* Add Viewers */
-
-.anim {
-    transform: scale(1.5);
-}
-
-#viewerBlock {
-    float: left;
-}
-
-.viewerCount {
-    -webkit-transition: all .5s;
-    transition: all .5s;
-}
-
-.viewerCount {
-    position: absolute;
-    top: 20px;
-    right: 15px;
-    min-width: 48px;
-    height: 48px;
-    padding: .3em;
-    display: inline-block;
-    border-radius: 8px;
-    line-height: .9em;
-    color: #fff;
-    text-align: center;
-    background: #0142a3;
-}
-
-.viewerCount span {
-    display: block;
-    margin: 5px auto;
-    font-size: 10px;
-}
-
-.viewerCount #occupancy {
-    font-size: 32px;
 }

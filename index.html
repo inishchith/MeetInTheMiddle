@@ -15,30 +15,31 @@
 </head>
 
 <body>
-    <div class="container center" id="pseudo-nav">
-        <ul>
-            <li> <a href=""><b> About </b></a></li>
-            <li> <a href=""><b> Contact Us </b></a></li>
-            <li> <a href=""><b> Meet </b></a></li>
-        </ul>
-    </div>
 
     <div class="container" id="title">
-        <h1 class="indigo-text center"> Meet In The Middle </h1>
+        <h1 class="indigo-text center"> Meet In The Middle <img src="./assets/icons/marker.png"> </h1>
+    </div>
+    <div class="container center" id="pseudo-nav">
+        <b><a href="" class=""> ● Generate GroupID &nbsp; 🔖 &nbsp; &nbsp; ● Share link with friends &nbsp; 📢 &nbsp;
+                &nbsp; ●
+                Find
+                places
+                to meet &nbsp;🍴 🥓</a></b>
     </div>
 
-    <br>
+    <br><br>
 
     <div class="container" id="main">
         <div class="row">
-            <div class="col s12 m4 l4  offset-l2 valign-wrapper" id="group_add">
-                <input type="text" id="group_name" placeholder="Group Name">
-                <button class="btn-floating round waves-effect waves-light " type="submit" id="submit">
-                    <i class="material-icons right">send</i>
+            <div class="col s12 m3 l3  offset-l2 valign-wrapper" id="group_add">
+                <input type="text" id="group_name" placeholder="Group Name">&nbsp;&nbsp;
+                <button class="btn blue waves-effect waves-light " type="submit" id="submit">
+                    <i class="material-icons iniline-icon">send</i>
                 </button>
             </div>
-            <div class="col s12 m6 l6 right-align" id="map_place">
-                <img class="responsive-img img_about materialboxed" src="https://www.tandemmadrid.com/tandem/wp-content/uploads/2015/11/map-map-marker-icon.png">
+
+            <div class="col s12 m5 l5 right-align offset-l2" id="map_place">
+                <img class="responsive-img img_about materialboxed" src="./assets/icons/google-maps.png">
             </div>
         </div>
     </div>
@@ -47,12 +48,18 @@
         var arrow = document.getElementById('submit');
 
         function genGroupID(name) {
-            return name + "123";
+            for (var i = 0; i < 4; i++) {
+                name = name + Math.floor(Math.random() * 10);
+            }
+            return name;
         }
 
         arrow.onclick = function () {
-            console.log("HEY");
             var groupName = document.getElementById('group_name').value;
+            if (!groupName) {
+                alert("Please Enter a string");
+                return false;
+            }
             var groupID = genGroupID(groupName);
             // localStorage.setItem("groupID", groupID);
             window.location = './MeetMe.html?username=' + groupID;
