@@ -4,9 +4,16 @@
     box-sizing: border-box;
 }
 
+body {
+    display: flex;
+    max-height: 100vh;
+    flex-direction: column;
+}
+
 /*
 Meeting.css 
 */
+
 
 #offset {
     top: 100px;
@@ -136,6 +143,27 @@ img.responsive-img {
 }
 
 #group_add {
-    height: 40vh;
+    height: 45vh;
     margin-right: auto;
+}
+
+#main {
+    margin-top: 40px;
+}
+
+@media only screen and (max-width:650px) {
+    #title>h1 {
+        margin-top: 8vh;
+    }
+
+    #map_place {
+        text-align: center;
+        margin-top: -40px;
+    }
+
+    #group_add {
+        text-align: center;
+        margin-top: -30px;
+        /* margin-right: auto; */
+    }
 }

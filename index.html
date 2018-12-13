@@ -27,22 +27,26 @@
                 to meet &nbsp;🍴 🥓</a></b>
     </div>
 
-    <br><br>
-
+    <br>
     <div class="container" id="main">
         <div class="row">
-            <div class="col s12 m3 l3  offset-l2 valign-wrapper" id="group_add">
+            <div class="col s12 m5 l5 right-align offset-l2 push-l5" id="map_place">
+                <img class="responsive-img img_about materialboxed" src="./assets/icons/google-maps.png">
+            </div>
+            <div class="col s12 m3 l3  offset-l2 pull-l7 valign-wrapper" id="group_add">
                 <input type="text" id="group_name" placeholder="Group Name">&nbsp;&nbsp;
                 <button class="btn blue waves-effect waves-light " type="submit" id="submit">
                     <i class="material-icons iniline-icon">send</i>
                 </button>
             </div>
-
-            <div class="col s12 m5 l5 right-align offset-l2" id="map_place">
-                <img class="responsive-img img_about materialboxed" src="./assets/icons/google-maps.png">
-            </div>
         </div>
     </div>
+    </div>
+    <!-- <footer class="page-footer indigo black-text" style="position:fixed;bottom:0;left:0;width:100%;">
+
+        <p class="center">built with &lt;3</p>
+    </footer> -->
+
 
     <script>
         var arrow = document.getElementById('submit');
@@ -65,7 +69,6 @@
             window.location = './MeetMe.html?username=' + groupID;
         }
     </script>
-
     <a href="https://github.com/inishchith/MeetInTheMiddle" class="github-corner" aria-label="View source on GitHub"
         target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#3f51b5; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
             aria-hidden="true">

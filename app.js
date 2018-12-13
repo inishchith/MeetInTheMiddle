@@ -11,6 +11,10 @@ var pubnub = PUBNUB.init({
     ssl: "https:" === document.location.protocol
 })
 
+function debug(query) {
+    console.log("Restricted due to " + query);
+}
+
 function initMap() {
 
     var peoplePlacesName = [];
@@ -188,8 +192,7 @@ function initMap() {
                     console.log('No results found');
                 }
             } else {
-
-                console.log('Geocoder failed due to: ' + status);
+                debug(" Geocoder status:" + status);
             }
         });
     }
@@ -244,7 +247,8 @@ function initMap() {
                 if (status == google.maps.DirectionsStatus.OK) {;
                     renderRoute(response);
                 } else {
-                    alert("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
+                    console.log("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
+                    debug(" Directions status:" + status);
                 }
             });
         }
@@ -309,6 +313,8 @@ function initMap() {
                 for (i = 0; i < Math.min(MAX_PLACES, results.length); i++) {
                     createMarker(results[i]);
                 }
+            } else {
+                debug(" PlacesServices status:" + status);
             }
         }
 
