@@ -63,7 +63,8 @@ function initMap() {
 
     var groupCoordinates = [],
         n_cords = 0,
-        centroid = [], centroidMarker, allMarkers = [];
+        centroid = [],
+        centroidMarker, allMarkers = [];
 
     var RADIUS_SPAN = 1500,
         MAX_PLACES = 3;
@@ -91,7 +92,7 @@ function initMap() {
 
 
     // GETTING CENTROID 
-    function getCentroid(addPoint,centroidX, isNewPoint) {
+    function getCentroid(addPoint, centroidX, isNewPoint) {
         // n_cords >= 2 ; else show markeds on self and no further rendering 
         // render on addition [ cords.length ] 
 
@@ -126,8 +127,7 @@ function initMap() {
                 infowindow.setContent("<b>Hey,<b><br><hr><b>You're MidWay!</b>");
                 infowindow.open(map, centroidMarker);
             });
-            
-            console.log(centroid,addPoint,isNewPoint);
+
             map.setZoom(13);
             map.setCenter(new google.maps.LatLng(centroid.lat, centroid.lng));
 
@@ -319,10 +319,10 @@ function initMap() {
         }
     }
 
-    function updateView(addPoint,centroid, isNewPoint) {
+    function updateView(addPoint, centroid, isNewPoint) {
         if (n_cords > 1) {
             clearMap();
-            getCentroid(addPoint,centroid, isNewPoint);
+            getCentroid(addPoint, centroid, isNewPoint);
             showRoute();
             drawMarkers();
             infowindow.setContent("<b>Hey,<b><br><hr><b>You're MidWay!</b>");
@@ -355,11 +355,9 @@ function initMap() {
                 allMarkers.push(newMarker);
                 map.setCenter(new google.maps.LatLng(cord.lat, cord.lng));
                 centroid = cord;
-                console.log(centroid,"HEYY@");
             } else {
                 clearMap();
-                console.log(cord,centroid,"HEYYYY");
-                updateView(cord,centroid, true);
+                updateView(cord, centroid, true);
             }
 
             console.log("LOCATION ADDED !");
@@ -372,7 +370,6 @@ function initMap() {
         addPeople();
 
         // PUBLISH DATA
-        console.log(centroid,"ADD");
         publish({
             points: groupCoordinates,
             placeNames: peoplePlacesName,
@@ -387,7 +384,6 @@ function initMap() {
         peoplePlacesName = []
 
         // PUBLISH DATA
-        console.log(centroid,"REMOVE");
         publish({
             points: groupCoordinates,
             placeNames: peoplePlacesName,
@@ -441,8 +437,8 @@ function initMap() {
         centroid = data.polCentroid;
 
         n_cords = groupCoordinates.length;
-        console.log("PUBLISHED",data);
-        updateView(centroid,centroid, false);
+        console.log("PUBLISHED Data: ", data);
+        updateView(centroid, centroid, false);
     }
 
     /* PUBNUB */
