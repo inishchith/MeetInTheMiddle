@@ -5,8 +5,8 @@ if (!channelName) {
 }
 
 var pubnub = PUBNUB.init({
-    subscribe_key: "sub-c-d0d6bc1a-fc90-11e8-80f1-b6259b5c8742",
-    publish_key: "pub-c-c6dca816-1763-49ea-9c45-5edc5e368554",
+    subscribe_key: "sub-c-8ba102aa-ff14-11e8-ba8a-aef4d14eb57e",
+    publish_key: "pub-c-8ac19ee1-39c1-4501-bdff-3da8f7362c16",
     leave_on_unload: !0,
     ssl: "https:" === document.location.protocol
 })
@@ -63,7 +63,7 @@ function initMap() {
 
     var groupCoordinates = [],
         n_cords = 0,
-        centroid, centroidMarker, allMarkers = [];
+        centroid = [], centroidMarker, allMarkers = [];
 
     var RADIUS_SPAN = 1500,
         MAX_PLACES = 3;
@@ -91,32 +91,21 @@ function initMap() {
 
 
     // GETTING CENTROID 
-    function getCentroid() {
+    function getCentroid(addPoint,centroidX, isNewPoint) {
         // n_cords >= 2 ; else show markeds on self and no further rendering 
         // render on addition [ cords.length ] 
-
 
         if (n_cords > 1) {
             console.log("Getting Centroid..");
 
-            var bounds = new google.maps.LatLngBounds();
-
-            var polygonCoords = []
-
-            for (i = 0; i < n_cords + 1; i++) {
-
-                var latlngObj = new google.maps.LatLng(groupCoordinates[i % n_cords].lat, groupCoordinates[i % n_cords].lng);
-                polygonCoords.push(latlngObj);
+            if (isNewPoint) {
+                centroid = {
+                    lat: centroidX.lat + (addPoint.lat - centroidX.lat) / n_cords,
+                    lng: centroidX.lng + (addPoint.lng - centroidX.lng) / n_cords
+                };
+            } else {
+                centroid = addPoint;
             }
-
-            for (i = 0; i < n_cords + 1; i++) {
-                bounds.extend(polygonCoords[i]);
-            }
-
-            centroid = {
-                lat: bounds.getCenter().lat(),
-                lng: bounds.getCenter().lng()
-            };
 
             console.log("CENTROID : ", centroid);
 
@@ -137,7 +126,8 @@ function initMap() {
                 infowindow.setContent("<b>Hey,<b><br><hr><b>You're MidWay!</b>");
                 infowindow.open(map, centroidMarker);
             });
-
+            
+            console.log(centroid,addPoint,isNewPoint);
             map.setZoom(13);
             map.setCenter(new google.maps.LatLng(centroid.lat, centroid.lng));
 
@@ -152,6 +142,7 @@ function initMap() {
             });
 
         } else if (n_cords == 1) {
+            centroid = addPoint;
             console.log("ONLY SINGLE COORDINATES ");
 
         } else {
@@ -328,10 +319,10 @@ function initMap() {
         }
     }
 
-    function updateView() {
+    function updateView(addPoint,centroid, isNewPoint) {
         if (n_cords > 1) {
             clearMap();
-            getCentroid();
+            getCentroid(addPoint,centroid, isNewPoint);
             showRoute();
             drawMarkers();
             infowindow.setContent("<b>Hey,<b><br><hr><b>You're MidWay!</b>");
@@ -363,9 +354,12 @@ function initMap() {
 
                 allMarkers.push(newMarker);
                 map.setCenter(new google.maps.LatLng(cord.lat, cord.lng));
+                centroid = cord;
+                console.log(centroid,"HEYY@");
             } else {
                 clearMap();
-                updateView();
+                console.log(cord,centroid,"HEYYYY");
+                updateView(cord,centroid, true);
             }
 
             console.log("LOCATION ADDED !");
@@ -373,16 +367,16 @@ function initMap() {
         locationInput.value = "";
     }
 
-
     // ADDED PERSON 
     add_people.onclick = function () {
         addPeople();
 
         // PUBLISH DATA
+        console.log(centroid,"ADD");
         publish({
-            n_points: n_cords,
             points: groupCoordinates,
-            placeNames: peoplePlacesName
+            placeNames: peoplePlacesName,
+            polCentroid: centroid
         });
     }
 
@@ -393,10 +387,11 @@ function initMap() {
         peoplePlacesName = []
 
         // PUBLISH DATA
+        console.log(centroid,"REMOVE");
         publish({
-            n_points: n_cords,
             points: groupCoordinates,
-            placeNames: peoplePlacesName
+            placeNames: peoplePlacesName,
+            polCentroid: centroid
         });
         clearMap();
         location.reload();
@@ -441,11 +436,13 @@ function initMap() {
         if (!data) {
             console.log("NO DATA")
         }
-        console.log(data);
-        n_cords = data.n_points;
         groupCoordinates = data.points;
-        peoplePlacesName = data.placeNames
-        updateView();
+        peoplePlacesName = data.placeNames;
+        centroid = data.polCentroid;
+
+        n_cords = groupCoordinates.length;
+        console.log("PUBLISHED",data);
+        updateView(centroid,centroid, false);
     }
 
     /* PUBNUB */
