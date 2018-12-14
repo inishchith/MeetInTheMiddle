@@ -31,3 +31,7 @@
 - Find places to meet 😛
 
 > Exhaustive List of TODO [here](./TODO.md)
+
+#### Recognition
+
+- Featured on Product Hunt and [#4 Product](https://www.producthunt.com/posts/meet-in-the-middle) on 13th December 2018 with 400+ Votes

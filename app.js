@@ -75,6 +75,7 @@ function initMap() {
     var OpenBar = document.getElementById('Open');
     var CloseBar = document.getElementById('Close');
     var ResultBar = document.getElementById('ResultBar');
+    var currentLocation = document.getElementById('getCurrentLocation');
 
 
     var locationInput = document.getElementById('autocomplete-input');
@@ -333,7 +334,7 @@ function initMap() {
     }
 
     function addPeople() {
-        if (objLocation.formatted_address) {
+        if (objLocation) {
             // console.log(objLocation.formatted_address, objLocation);
 
             cord = {
@@ -361,6 +362,8 @@ function initMap() {
             }
 
             console.log("LOCATION ADDED !");
+        } else {
+            alert("📍 Enter a valid location");
         }
         locationInput.value = "";
     }
@@ -379,6 +382,7 @@ function initMap() {
 
     // REMOVE ALL 
     remove_people.onclick = function () {
+        alert("📍 Map Cleared");
         n_cords = 0;
         groupCoordinates = [];
         peoplePlacesName = []
