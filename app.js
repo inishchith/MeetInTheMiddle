@@ -124,7 +124,7 @@ function initMap() {
             allMarkers.push(centroidMarker);
 
             google.maps.event.addListener(centroidMarker, 'click', function () {
-                infowindow.setContent("<b>Hey,<b><br><hr><b>You're MidWay!</b>");
+                infowindow.setContent("<b>Hey,<b><br><hr><b>Your MidWay!</b>");
                 infowindow.open(map, centroidMarker);
             });
 
@@ -325,7 +325,7 @@ function initMap() {
             getCentroid(addPoint, centroid, isNewPoint);
             showRoute();
             drawMarkers();
-            infowindow.setContent("<b>Hey,<b><br><hr><b>You're MidWay!</b>");
+            infowindow.setContent("<b>Hey,<b><br><hr><b>Your MidWay!</b>");
             infowindow.open(map, centroidMarker);
             addNearbyServices();
             showPeople();
@@ -425,7 +425,7 @@ function initMap() {
         }
     }
 
-    infowindow.setContent("<b>Hey,<b><br><hr><b>You're MidWay!</b>");
+    infowindow.setContent("<b>Hey,<b><br><hr><b>Your MidWay!</b>");
     infowindow.open(map, centroidMarker);
 
     function publishedData(data) {
