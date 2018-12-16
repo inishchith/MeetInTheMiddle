@@ -155,7 +155,7 @@ function initMap() {
 
 
     // REVERSE GEOCODING
-    function reverse_geocoding(point, markerR) {
+    function reverse_geocoding(point, markerR, posI) {
 
         geocoder.geocode({
             'location': point
@@ -174,8 +174,8 @@ function initMap() {
                         }
 
                         toggleBounce();
-                        // console.log(results[0] + "INSIDE REVERSE GEOCODING ");
-                        infowindow.setContent("<b>" + results[0].formatted_address + "<hr>" + "<a href='http://www.google.com/maps/place/" + point.lat + "," + point.lng + "' target='_blank'> Get Direction > </a></b>");
+
+                        infowindow.setContent("<b>" + peoplePlacesName[posI] + "</b> <br><br>" + results[0].formatted_address + "<hr>" + "<a href='http://www.google.com/maps/place/" + point.lat + "," + point.lng + "' target='_blank'> Get Direction > </a>");
                         infowindow.open(map, markerR);
                         setTimeout(toggleBounce, 1500);
                     });
@@ -202,7 +202,7 @@ function initMap() {
                 animation: google.maps.Animation.DROP,
             });
 
-            reverse_geocoding(groupCoordinates[i], cord_marker);
+            reverse_geocoding(groupCoordinates[i], cord_marker, i);
             allMarkers.push(cord_marker);
         }
         // reverse_geocoding(centroid, centroidMarker);
@@ -265,16 +265,17 @@ function initMap() {
         var icon;
 
         function createMarker(place) {
-            var placeData = "<b>" + place.name + "</b> <hr>";
+            var placeData = "<b>" + place.name + "</b><br><br>"+ place.vicinity ;
+
             if (place.photos != undefined) {
-                placeData += "<img src='" + place.photos[0].getUrl({
+                placeData += "<hr> <img src='" + place.photos[0].getUrl({
                     'maxWidth': 200,
                     'maxHeight': 200
                 }) + "' />";
             }
 
             if (place.rating != undefined) {
-                placeData += " Rating : " + place.rating + "<hr>";
+                placeData += " <br> Rating : " + place.rating ;
             }
 
             var placeLoc = place.geometry.location;
@@ -291,7 +292,7 @@ function initMap() {
                 animation: google.maps.Animation.DROP,
             });
 
-            placeData += place.vicinity + "<hr>" + "<a href='http://www.google.com/maps/place/" + placeLoc.lat() + "," + placeLoc.lng() + "' target='_blank'> Get Direction > </a></b>";
+            placeData += "<hr> <a href='http://www.google.com/maps/place/" + placeLoc.lat() + "," + placeLoc.lng() + "' target='_blank'> Get Direction > </a></b>";
 
             google.maps.event.addListener(marker, 'click', function () {
                 infowindow.setContent(placeData);
