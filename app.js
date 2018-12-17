@@ -1,4 +1,4 @@
-var channelName = location.search.split('username=')[1]
+var channelName = location.search.split('username=')[1];
 if (!channelName) {
     alert("Du U Kno Da Wae REDIRECTING... :P")
     history.go(-1);
@@ -37,7 +37,7 @@ function initMap() {
     function clearMap() {
         map = new google.maps.Map(
             document.getElementById('map'), {
-                zoom: 3,
+                zoom: 3.3,
                 mapTypeControl: false,
                 styles: [{
                     "featureType": "administrative.country",
@@ -265,7 +265,7 @@ function initMap() {
         var icon;
 
         function createMarker(place) {
-            var placeData = "<b>" + place.name + "</b><br><br>"+ place.vicinity ;
+            var placeData = "<b>" + place.name + "</b><br><br>" + place.vicinity;
 
             if (place.photos != undefined) {
                 placeData += "<hr> <img src='" + place.photos[0].getUrl({
@@ -275,7 +275,7 @@ function initMap() {
             }
 
             if (place.rating != undefined) {
-                placeData += " <br> Rating : " + place.rating ;
+                placeData += " <br> Rating : " + place.rating;
             }
 
             var placeLoc = place.geometry.location;
@@ -369,7 +369,7 @@ function initMap() {
         locationInput.value = "";
     }
 
-    // ADDED PERSON 
+    // ADDED PERSON & PUBLISH
     add_people.onclick = function () {
         addPeople();
 
@@ -381,7 +381,7 @@ function initMap() {
         });
     }
 
-    // REMOVE ALL 
+    // REMOVE ALL & PUBLISH
     remove_people.onclick = function () {
         alert("📍 Map Cleared");
         n_cords = 0;
@@ -425,7 +425,9 @@ function initMap() {
                 name = name.substring(0, 30);
                 name += " ..";
             }
-            li.innerHTML = "<p> <i class='material-icons green-text inline-icon'>adjust</i>" + name + "  </p>"
+            // li.setAttribute("id", "remove_id");
+            // li.setAttribute("id", i);
+            li.innerHTML = "<p> <i class='material-icons red-text inline-icon'>cancel</i> &nbsp;" + name + "  </p>"
             people.appendChild(li);
         }
     }
