@@ -66,7 +66,7 @@ function initMap() {
         centroidMarker;
 
     var RADIUS_SPAN = 1500,
-        MAX_PLACES = 3;
+        MAX_PLACES = 4;
 
     // DOM DEFNS ;
     var add_people = document.getElementById('add_people');
@@ -97,18 +97,18 @@ function initMap() {
         // render on addition [ cords.length ] 
 
         if (n_cords > 1) {
-            console.log("Getting Centroid..");
 
             if (isNewPoint) {
                 centroid = {
-                    lat: centroidX.lat + (addPoint.lat - centroidX.lat) / n_cords,
-                    lng: centroidX.lng + (addPoint.lng - centroidX.lng) / n_cords
+                    lat: ( centroidX.lat * (n_cords - 1) + addPoint.lat ) / n_cords,
+                    lng: ( centroidX.lng * (n_cords - 1) + addPoint.lng ) / n_cords
                 };
             } else {
-                centroid = addPoint;
+                centroid = {
+                    lat: ( centroidX.lat * (n_cords + 1) - addPoint.lat ) / n_cords,
+                    lng: ( centroidX.lng * (n_cords + 1) - addPoint.lng ) / n_cords
+                };
             }
-
-            console.log("CENTROID : ", centroid);
 
             // BIND PLACES AND DRAW BORDER 
             centroidMarker = new google.maps.Marker({
@@ -142,7 +142,7 @@ function initMap() {
 
         } else if (n_cords == 1) {
             centroid = addPoint;
-            console.log("ONLY SINGLE COORDINATES ");
+            console.log("ONLY SINGLE COORDINATE ");
 
         } else {
             console.log("NO COORDINATES ;( ");
@@ -178,7 +178,7 @@ function initMap() {
                     });
 
                 } else {
-                    console.log('No results found');
+                    console.log('NO RESULT FOUND');
                 }
             } else {
                 debug(" Geocoder status:" + status);
@@ -234,8 +234,8 @@ function initMap() {
                 if (status == google.maps.DirectionsStatus.OK) {;
                     renderRoute(response);
                 } else {
-                    console.log("Directions Request from " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
-                    debug(" Directions status:" + status);
+                    console.log("Directions Request From " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
+                    debug(" Directions Status:" + status);
                 }
             });
         }
@@ -247,12 +247,12 @@ function initMap() {
             return;
         var service = new google.maps.places.PlacesService(map);
 
+        // For More: https://developers.google.com/places/supported_types
         types = [
             ['restaurant'],
             ['cafe'],
             ['shopping_mall'],
             ['movie_theater'],
-            ['night_club'],
             ['park'],
             ['bar']
         ];
@@ -331,7 +331,6 @@ function initMap() {
 
     function addPeople() {
         if (objLocation) {
-            // console.log(objLocation.formatted_address, objLocation);
 
             cord = {
                 lat: objLocation.geometry.location.lat(),
@@ -358,7 +357,6 @@ function initMap() {
                 map.setCenter(new google.maps.LatLng(cord.lat, cord.lng));
                 centroid = cord;
             } else {
-                clearMap();
                 updateView(cord, centroid, true);
             }
 
@@ -387,13 +385,14 @@ function initMap() {
         n_cords = 0;
         placesData = [];
 
+        clearMap();
+
         // PUBLISH DATA
         publish({
             placeDetails: placesData,
             polCentroid: centroid
         });
 
-        clearMap();
         location.reload();
     }
 
@@ -414,33 +413,42 @@ function initMap() {
 
     function showPeople() {
         var people = document.getElementById("online_people"),
-            li, cancelButton;
+            li;
         people.innerHTML = '';
         for (i = 0; i < n_cords; i++) {
             li = document.createElement("li");
 
             var name = placesData[i].name;
-            var len = placesData[i].length;
+            var len = placesData[i].name.length;
 
             if (len > 30) {
                 name = name.substring(0, 30);
                 name += " ..";
             }
-
-
-            li.innerHTML = "<p> <i class='material-icons red-text inline-icon remove-me' id='remove-me'>cancel</i> &nbsp;" + name + "  </p>";
+            li.innerHTML = "<p> <i class='material-icons red-text inline-icon remove-me' id='remove-me' style='cursor:pointer'>cancel</i> &nbsp;<b>" + name + "</b>  </p>";
 
             $(document).on('click', "#remove-me", function (e) {
+
                 var entry = $(this).parent();
                 var placeName = entry.text().substring(8),
                     j;
                 entry.remove();
+
                 placeName = placeName.substring(1, placeName.length - 2);
+
                 for (j = 0; j < placesData.length; j++) {
-                    if (placesData[j].name === placeName) {
-                        console.log("HEy");
+                    name = placesData[j].name;
+
+                    if (name.length > 30) {
+                        name = name.substring(0, 30);
+                        name += " ..";
+                    }
+
+                    if (name === placeName) {
+                        var sub_cord = placesData[j].cord;
                         placesData.splice(j, 1);
                         n_cords -= 1;
+                        updateView(sub_cord,centroid,false);
                         publish({
                             placeDetails: placesData,
                             polCentroid: centroid
