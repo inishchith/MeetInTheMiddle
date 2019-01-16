@@ -327,6 +327,9 @@ function initMap() {
             addNearbyServices();
             showPeople();
         }
+        else{
+            showPeople();
+        }
     }
 
     function addPeople() {
@@ -456,6 +459,7 @@ function initMap() {
                         break;
                     }
                 }
+                location.reload();
             });
             people.appendChild(li);
         }
