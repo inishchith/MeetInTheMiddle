@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="shortcut icon" type="image/icon" href="./assets/icons/favicon.ico" />
-    <title>Meeting.. </title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <title>Meeting..</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
         crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Amaranth|Raleway|Poor+Story|K2D" rel="stylesheet" />
@@ -17,10 +17,12 @@
 <body>
     <div class="" id="map"></div>
     <div class="container ">
-
-        <button class="btn-floating orange accent-4 waves-effect waves-light btn-small" id="Open" style="display:none"><i
-                class="material-icons">dehaze</i></button>
-        <button class="btn-floating blue waves-effect waves-light btn-small " id="Close" style=""><i class="material-icons">close</i></button>
+        <button class="btn-floating orange accent-4 waves-effect waves-light btn-small" id="Open" style="display:none">
+            <i class="material-icons">dehaze</i>
+        </button>
+        <button class="btn-floating blue waves-effect waves-light btn-small " id="Close" style="">
+            <i class="material-icons">close</i>
+        </button>
         <div id="ResultBar">
             <div class="row">
                 <div class="viewerCount" id="viewerBlock">
@@ -31,21 +33,21 @@
 
             <div class="row">
                 <div class="input-field">
-                    <input type="text" id="autocomplete-input" class="autocomplete pos-left">
+                    <input type="text" id="autocomplete-input" class="autocomplete pos-left" />
                     <div align="center">
-                        <button class="btn-floating green waves-effect waves-light btn-small" id="add_people"><i class="material-icons">add</i>
-                        </button> <b>Add</b> &nbsp; &nbsp;
-                        <button class="btn-floating red waves-effect waves-light btn-small" id="remove_people"><i class="material-icons">clear</i>
-                        </button><b> Clear All</b>
+                        <button class="btn-floating green waves-effect waves-light btn-small" id="add_people">
+                            <i class="material-icons">add</i>
+                        </button>
+                        <b>Add</b> &nbsp; &nbsp;
+                        <button class="btn-floating red waves-effect waves-light btn-small" id="remove_people">
+                            <i class="material-icons">clear</i></button><b> Clear All</b>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <ul style="list-style-type:square" id="online_people">
-                </ul>
+                <ul style="list-style-type:square" id="online_people"></ul>
             </div>
-
         </div>
     </div>
 
@@ -55,7 +57,7 @@
 
     <script src="//cdn.pubnub.com/pubnub-3.14.1.min.js"></script>
     <script src="./app.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDIIJECbuBNdgTgRmXmn_JetJ1unSEsz_E&libraries=places&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP9GSQeqW2m96x4qmg6m71fGAOQIrsJqE&libraries=places&callback=initMap"
         async defer></script>
 
     <!-- Compiled and minified JavaScript -->
@@ -74,34 +76,34 @@
         </svg></a>
     <style>
         .github-corner:hover .octo-arm {
-            animation: octocat-wave 560ms ease-in-out
+            animation: octocat-wave 560ms ease-in-out;
         }
 
         @keyframes octocat-wave {
 
             0%,
             100% {
-                transform: rotate(0)
+                transform: rotate(0);
             }
 
             20%,
             60% {
-                transform: rotate(-25deg)
+                transform: rotate(-25deg);
             }
 
             40%,
             80% {
-                transform: rotate(10deg)
+                transform: rotate(10deg);
             }
         }
 
-        @media (max-width:500px) {
+        @media (max-width: 500px) {
             .github-corner:hover .octo-arm {
-                animation: none
+                animation: none;
             }
 
             .github-corner .octo-arm {
-                animation: octocat-wave 560ms ease-in-out
+                animation: octocat-wave 560ms ease-in-out;
             }
         }
     </style>

@@ -100,13 +100,13 @@ function initMap() {
 
             if (isNewPoint) {
                 centroid = {
-                    lat: ( centroidX.lat * (n_cords - 1) + addPoint.lat ) / n_cords,
-                    lng: ( centroidX.lng * (n_cords - 1) + addPoint.lng ) / n_cords
+                    lat: (centroidX.lat * (n_cords - 1) + addPoint.lat) / n_cords,
+                    lng: (centroidX.lng * (n_cords - 1) + addPoint.lng) / n_cords
                 };
             } else {
                 centroid = {
-                    lat: ( centroidX.lat * (n_cords + 1) - addPoint.lat ) / n_cords,
-                    lng: ( centroidX.lng * (n_cords + 1) - addPoint.lng ) / n_cords
+                    lat: (centroidX.lat * (n_cords + 1) - addPoint.lat) / n_cords,
+                    lng: (centroidX.lng * (n_cords + 1) - addPoint.lng) / n_cords
                 };
             }
 
@@ -326,15 +326,13 @@ function initMap() {
             infowindow.open(map, centroidMarker);
             addNearbyServices();
             showPeople();
-        }
-        else{
+        } else {
             showPeople();
         }
     }
 
     function addPeople() {
         if (objLocation) {
-
             cord = {
                 lat: objLocation.geometry.location.lat(),
                 lng: objLocation.geometry.location.lng(),
@@ -359,15 +357,19 @@ function initMap() {
                 });
                 map.setCenter(new google.maps.LatLng(cord.lat, cord.lng));
                 centroid = cord;
+
             } else {
                 updateView(cord, centroid, true);
             }
 
             console.log("LOCATION ADDED !");
+            objLocation = null;
         } else {
+
             alert("📍 Enter a valid location");
         }
         locationInput.value = "";
+
     }
 
     // ADDED PERSON & PUBLISH
@@ -451,7 +453,7 @@ function initMap() {
                         var sub_cord = placesData[j].cord;
                         placesData.splice(j, 1);
                         n_cords -= 1;
-                        updateView(sub_cord,centroid,false);
+                        updateView(sub_cord, centroid, false);
                         publish({
                             placeDetails: placesData,
                             polCentroid: centroid
