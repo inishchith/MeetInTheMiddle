@@ -266,7 +266,7 @@ function initMap() {
                 placeData += "<hr> <img src='" + place.photos[0].getUrl({
                     'maxWidth': 200,
                     'maxHeight': 200
-                }) + "' />";
+                }) + "' alt='results' />";
             }
 
             if (place.rating != undefined) {

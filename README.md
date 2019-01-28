@@ -16,10 +16,10 @@
         </a> 
     </b>
     <br> 
-    <img src ="./assets/meetInTheMiddle-2.gif" width=275px >
+    <img src ="./assets/meetInTheMiddle-2.gif" width=275px alt="demo-gif-1">
     <p> <b> MoboView </b><p>
     <br>
-    <img src ="./assets/meetInTheMiddle.gif" width=700px>
+    <img src ="./assets/meetInTheMiddle.gif" width=700px alt="demo-gif-2">
     <p> <b> WebView </b> <p>
 </div>
 
