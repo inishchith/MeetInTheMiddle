@@ -8,7 +8,8 @@
     <title> Meet In The Middle </title>
     <link rel="shortcut icon" type="image/icon" href="./assets/icons/favicon.ico" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
         crossorigin="anonymous" />
 
@@ -19,38 +20,57 @@
 
 <body>
 
-    <div class="container" id="title">
-        <h1 class="indigo-text center"> Meet In The Middle <img src="./assets/icons/marker.png" alt="marker-icon"> </h1>
-    </div>
-    <div class="container center" id="pseudo-nav">
-        <b><a href="" class=""> ● Generate GroupID &nbsp; 🔖 &nbsp; &nbsp; ● Share link with friends &nbsp; 📢 &nbsp;
-                &nbsp; ●
-                Find
-                places
-                to meet &nbsp;🍴 🥓</a></b>
-    </div>
+    <div class="bg-gradient"></div>
 
-    <br>
-    <div class="container" id="main">
-        <div class="row">
-            <div class="col s12 m5 l5 right-align offset-l2 push-l5" id="map_place">
-                <img class="responsive-img img_about materialboxed" src="./assets/icons/google-maps.png" alt="home-logo">
+    <div class="side-box">
+        <div class="side-box-content">
+
+            <h1 class="side-box__title">
+                Meet In
+                <img src="./assets/icons/location.svg" class="side-box__title__icon">
+                the Middle
+            </h1>
+
+            <ol class="instructions">
+                <li>Create your group</li>
+                <li>Share it with your friends</li>
+                <li>Find the place to meet</li>
+            </ol>
+
+            <div class="input-group">
+                <input type="text"
+                    id="group_name"
+                    autofocus
+                    class="form-control"
+                    placeholder="Name the group">
+                <div class="input-group-append">
+                    <button class="btn btn-danger px-4"
+                            type="submit"
+                            id="submit">
+                        Create
+                    </button>
+                </div>
             </div>
-            <div class="col s12 m3 l3  offset-l2 pull-l7 valign-wrapper" id="group_add">
-                <input type="text" id="group_name" placeholder="Group Name">&nbsp;&nbsp;
-                <button class="btn blue waves-effect waves-light " type="submit" id="submit">
-                    <i class="material-icons iniline-icon">send</i>
-                </button>
+
+            <!-- <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-danger" type="button" id="button-addon2">Button</button>
             </div>
+            </div> -->
+
+            <footer class="footer d-flex">
+                <a href="https://twitter.com/inishchith?ref_src=twsrc%5Etfw" class="twitter-follow-button"
+                    data-size="large" data-show-count="false">Follow @inishchith</a>
+                <p class="ml-auto text-muted">
+                    Image by
+                    <a href="https://unsplash.com/photos/tXiMrX3Gc-g"> Unsplash </a>
+                </p>
+            </footer>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
     </div>
-    </div>
-    <footer class="page-footer transparent black-text" style="position:fixed;bottom:0;left:0;width:100%;">
-        <p class="center"><a href="https://twitter.com/inishchith?ref_src=twsrc%5Etfw" class="twitter-follow-button"
-                data-size="large" data-show-count="false">Follow @inishchith</a>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </p>
-    </footer>
+
 
 
     <script>
@@ -66,7 +86,7 @@
         arrow.onclick = function () {
             var groupName = document.getElementById('group_name').value;
             if (!groupName) {
-                alert("Please Enter a string");
+                alert("Please Enter the group name");
                 return false;
             }
             var groupID = genGroupID(groupName);
@@ -82,7 +102,7 @@
                 fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
             <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
                 fill="currentColor" class="octo-body"></path>
-        </svg></a>
+        </svg></p>
     <style>
         .github-corner:hover .octo-arm {
             animation: octocat-wave 560ms ease-in-out
