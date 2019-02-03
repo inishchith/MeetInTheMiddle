@@ -384,7 +384,6 @@ function initMap() {
 
     // REMOVE ALL & PUBLISH
     remove_people.onclick = function () {
-        alert("📍 Map Cleared");
         n_cords = 0;
         placesData = [];
 
