@@ -1,12 +1,14 @@
 body, html {
     height: 100%;
-    background: rgb(238, 199, 199);
+    /* background: rgb(238, 199, 199); */
     overflow: hidden;
     color: #36516D;
     font-size: 16px;
     font-family: 'Avenir', Arial, Helvetica, sans-serif;
 
-    background: url(https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3298&q=80) no-repeat center center fixed;
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -32,7 +34,8 @@ body, html {
 .side-box-content {
     background-color: #fff;
     border-radius: 40px 40px 10px 10px;
-    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.15);
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1),
+                0 2px 5px 0 rgba(0, 0, 0, 0.15);
     height: 100%;
     display: flex;
     flex-direction: column;

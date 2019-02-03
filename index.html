@@ -37,7 +37,8 @@
                 <li>Find the place to meet</li>
             </ol>
 
-            <div class="input-group">
+            <form class="input-group"
+                id="group-name-form">
                 <input type="text"
                     id="group_name"
                     autofocus
@@ -50,20 +51,13 @@
                         Create
                     </button>
                 </div>
-            </div>
-
-            <!-- <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-danger" type="button" id="button-addon2">Button</button>
-            </div>
-            </div> -->
+            </form>
 
             <footer class="footer d-flex">
                 <a href="https://twitter.com/inishchith?ref_src=twsrc%5Etfw" class="twitter-follow-button"
                     data-size="large" data-show-count="false">Follow @inishchith</a>
                 <p class="ml-auto text-muted">
-                    Image by
+                    Images by
                     <a href="https://unsplash.com/photos/tXiMrX3Gc-g"> Unsplash </a>
                 </p>
             </footer>
@@ -74,7 +68,17 @@
 
 
     <script>
-        var arrow = document.getElementById('submit');
+        // Assign random image to body background
+        const backgroundImages = [
+            'https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80',
+            'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3298&q=80',
+            'https://images.unsplash.com/photo-1475483768296-6163e08872a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80',
+            'https://images.unsplash.com/photo-1444210971048-6130cf0c46cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3304&q=80',
+            'https://images.unsplash.com/photo-1474314881477-04c4aac40a0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80',
+        ]
+
+        document.body.style.backgroundImage = `url(${backgroundImages[Math.floor(Math.random() * backgroundImages.length)]})`
+
 
         function genGroupID(name) {
             for (var i = 0; i < 4; i++) {
@@ -83,17 +87,21 @@
             return name;
         }
 
-        arrow.onclick = function () {
+        const groupNameForm = document.getElementById('group-name-form');
+        groupNameForm.addEventListener('submit', e => {
+            e.preventDefault();
             var groupName = document.getElementById('group_name').value;
             if (!groupName) {
                 alert("Please Enter the group name");
                 return false;
             }
-            var groupID = genGroupID(groupName);
             // localStorage.setItem("groupID", groupID);
+            var groupID = genGroupID(groupName);
             window.location = './MeetMe.html?username=' + groupID;
-        }
+        })
     </script>
+
+
     <a href="https://github.com/inishchith/MeetInTheMiddle" class="github-corner" aria-label="View source on GitHub"
         rel="noreferrer" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#3f51b5; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
             aria-hidden="true">
@@ -104,37 +112,37 @@
                 fill="currentColor" class="octo-body"></path>
         </svg></p>
     <style>
+    .github-corner:hover .octo-arm {
+        animation: octocat-wave 560ms ease-in-out
+    }
+
+    @keyframes octocat-wave {
+
+        0%,
+        100% {
+            transform: rotate(0)
+        }
+
+        20%,
+        60% {
+            transform: rotate(-25deg)
+        }
+
+        40%,
+        80% {
+            transform: rotate(10deg)
+        }
+    }
+
+    @media (max-width:500px) {
         .github-corner:hover .octo-arm {
+            animation: none
+        }
+
+        .github-corner .octo-arm {
             animation: octocat-wave 560ms ease-in-out
         }
-
-        @keyframes octocat-wave {
-
-            0%,
-            100% {
-                transform: rotate(0)
-            }
-
-            20%,
-            60% {
-                transform: rotate(-25deg)
-            }
-
-            40%,
-            80% {
-                transform: rotate(10deg)
-            }
-        }
-
-        @media (max-width:500px) {
-            .github-corner:hover .octo-arm {
-                animation: none
-            }
-
-            .github-corner .octo-arm {
-                animation: octocat-wave 560ms ease-in-out
-            }
-        }
+    }
     </style>
 
 </body>
