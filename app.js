@@ -369,20 +369,18 @@ function initMap() {
             alert("📍 Enter a valid location");
         }
         locationInput.value = "";
-
     }
 
     // ADDED PERSON & PUBLISH
-    add_people.onclick = function () {
+    autocomplete_one.addListener('place_changed', e => {
         addPeople();
 
         // PUBLISH DATA
-
         publish({
             placeDetails: placesData,
             polCentroid: centroid
         });
-    }
+    })
 
     // REMOVE ALL & PUBLISH
     remove_people.onclick = function () {
