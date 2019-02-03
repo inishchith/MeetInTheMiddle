@@ -32,6 +32,10 @@
 
 > Exhaustive List of TODO [here](./TODO.md)
 
+#### Buy a coffee 😉
+
+> If you like what you see and would like to support the project, consider [ buying me a coffee ☕️ ](https://www.buymeacoffee.com/inishchtih)
+
 #### Recognition
 
 - Featured on **Product Hunt** and [#4 Product](https://www.producthunt.com/posts/meet-in-the-middle) on `13th December 2018` with **500+ Upvotes**
