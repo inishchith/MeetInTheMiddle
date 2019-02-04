@@ -34,7 +34,11 @@
 
 #### Buy a coffee 😉
 
-> If you like what you see and would like to support the project, consider [ buying me a coffee ☕️ ](https://www.buymeacoffee.com/inishchtih)
+> If you like what you see and would like to support the project, consider buying me a coffee ☕️
+
+<div align="center">
+<a href="https://www.buymeacoffee.com/inishchtih" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/black_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+</div>
 
 #### Recognition
 

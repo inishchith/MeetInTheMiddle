@@ -20,11 +20,12 @@
 <body>
     <div class="bg-gradient"></div>
     <div class="side-box">
-        <div class="side-box-content">
-            <h1 class="side-box__title">
-                Meet In
+        <div class="side-box-content justify-content-start justify-content-sm-center">
+
+            <h1 class="side-box__title d-flex flex-column flex-sm-row">
+                <span class="order-sm-0 order-1">Meet In</span>
                 <img src="./assets/icons/location.svg" class="side-box__title__icon">
-                the Middle
+                <span class="order-3">the Middle</span>
             </h1>
             <ol class="instructions">
                 <li>Create your group</li>
@@ -39,13 +40,18 @@
                     </button>
                 </div>
             </form>
-            <footer class="footer d-flex">
-                <a href="https://twitter.com/inishchith?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large"
-                    data-show-count="false">Follow @inishchith</a>
-                <p class="ml-auto text-muted">
-                    Images by
-                    <a href="https://unsplash.com/photos/tXiMrX3Gc-g"> Unsplash </a>
-                </p>
+
+            <footer class="row footer align-items-center justify-content-between">
+                <div class="col m6 s12">
+                    <a href="https://twitter.com/inishchith?ref_src=twsrc%5Etfw" class="twitter-follow-button"
+                        data-size="large" data-show-count="false">Follow @inishchith</a>
+                </div>
+                <div class="col m6 s12">
+                    <p class="text-muted mt-2 m-sm-0">
+                        Images by
+                        <a href="https://unsplash.com/photos/tXiMrX3Gc-g"> Unsplash </a>
+                    </p>
+                </div>
             </footer>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
