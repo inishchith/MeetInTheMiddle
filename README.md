@@ -32,14 +32,13 @@
 
 > Exhaustive List of TODO [here](./TODO.md)
 
-#### Buy a coffee 😉
-
-> If you like what you see and would like to support the project, consider buying me a coffee ☕️
-
-<div align="center">
-<a href="https://www.buymeacoffee.com/inishchtih" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/black_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
-</div>
 
 #### Recognition
+
+<div align="center">
+<a href="https://www.producthunt.com/posts/meet-in-the-middle?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-meet-in-the-middle" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=141173&theme=dark" alt="Meet In The Middle - Share a link & meet your friends midway | Product Hunt Embed" style="width: 250px; height: 54px;" width="250px" height="54px" />
+</a>
+</div>
+<br>
 
 - Featured on **Product Hunt** and [#4 Product](https://www.producthunt.com/posts/meet-in-the-middle) on `13th December 2018` with **500+ Upvotes**
