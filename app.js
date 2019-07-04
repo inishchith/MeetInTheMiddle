@@ -231,7 +231,8 @@ function initMap() {
             };
 
             directionsService.route(request, function (response, status) {
-                if (status == google.maps.DirectionsStatus.OK) {;
+                if (status == google.maps.DirectionsStatus.OK) {
+                    ;
                     renderRoute(response);
                 } else {
                     console.log("Directions Request From " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
