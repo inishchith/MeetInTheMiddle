@@ -3,6 +3,13 @@
  <img width=200px height=200px src="./assets/icons/google-maps.png" alt="Maps-logo"></a>
 </p>
 <h3 align="center">👬 Meet In The Middle</h3>
+
+<div align="center">
+
+[![Gitter](https://badges.gitter.im/mitm-js/community.svg)](https://gitter.im/mitm-js/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+</div>
+
 <p align="center"> • Generate GroupID &nbsp; 🔖 &nbsp; &nbsp; • Share link with friends &nbsp; 📢 &nbsp; &nbsp;• Find places to meet &nbsp;🍴🥓
     <br> 
 </p>
@@ -30,8 +37,9 @@
 - Now all your friends share same view via [interweb](https://www.pubnub.com/) 🎉
 - Find places to meet 😛
 
-> Exhaustive List of TODO [here](./TODO.md)
+### Contributions
 
+- Feel free to open issues and suggest ideas to improve.
 
 #### Recognition
 

@@ -1,8 +1,11 @@
-var channelName = location.search.split('username=')[1];
+var channelName = location.search.split('username=')[1]
 if (!channelName) {
-    alert("Du U Kno Da Wae REDIRECTING... :P")
-    history.go(-1);
+    alert("REDIRECTING... ")
+    history.go(-1)
 }
+
+var RADIUS_SPAN = 1500,
+    MAX_PLACES = 4;
 
 var pubnub = PUBNUB.init({
     subscribe_key: "sub-c-51770412-03ab-11e9-849f-127435af060e",
@@ -12,11 +15,10 @@ var pubnub = PUBNUB.init({
 })
 
 function debug(query) {
-    console.log("Restricted due to " + query);
+    console.log("[API-error] Restricted due to " + query)
 }
 
 function initMap() {
-
     var placesData = [];
     var i, map;
 
@@ -58,28 +60,17 @@ function initMap() {
     }
 
     clearMap();
-    console.log("Map Rendered !");
 
-
-    var n_cords = 0,
+    var nCords = 0,
         centroid = [],
         centroidMarker;
 
-    var RADIUS_SPAN = 1500,
-        MAX_PLACES = 4;
-
-    // DOM DEFNS ;
-    var add_people = document.getElementById('add_people');
-    var remove_people = document.getElementById('remove_people');
-    var OpenBar = document.getElementById('Open');
-    var CloseBar = document.getElementById('Close');
-    var ResultBar = document.getElementById('ResultBar');
-    var currentLocation = document.getElementById('getCurrentLocation');
-
-
-    var locationInput = document.getElementById('autocomplete-input');
-
-    var autocomplete_one = new google.maps.places.Autocomplete(locationInput);
+    var remove_people = document.getElementById('remove_people'),
+        OpenBar = document.getElementById('Open'),
+        CloseBar = document.getElementById('Close'),
+        ResultBar = document.getElementById('ResultBar'),
+        locationInput = document.getElementById('autocomplete-input'),
+        autocomplete_one = new google.maps.places.Autocomplete(locationInput);
 
     var objLocation;
     google.maps.event.addListener(autocomplete_one, 'place_changed', function () {
@@ -91,22 +82,21 @@ function initMap() {
     });
 
 
-    // GETTING CENTROID 
     function getCentroid(addPoint, centroidX, isNewPoint) {
-        // n_cords >= 2 ; else show markeds on self and no further rendering 
+        // nCords >= 2 ; else show markeds on self and no further rendering 
         // render on addition [ cords.length ] 
 
-        if (n_cords > 1) {
+        if (nCords > 1) {
 
             if (isNewPoint) {
                 centroid = {
-                    lat: (centroidX.lat * (n_cords - 1) + addPoint.lat) / n_cords,
-                    lng: (centroidX.lng * (n_cords - 1) + addPoint.lng) / n_cords
+                    lat: (centroidX.lat * (nCords - 1) + addPoint.lat) / nCords,
+                    lng: (centroidX.lng * (nCords - 1) + addPoint.lng) / nCords
                 };
             } else {
                 centroid = {
-                    lat: (centroidX.lat * (n_cords + 1) - addPoint.lat) / n_cords,
-                    lng: (centroidX.lng * (n_cords + 1) - addPoint.lng) / n_cords
+                    lat: (centroidX.lat * (nCords + 1) - addPoint.lat) / nCords,
+                    lng: (centroidX.lng * (nCords + 1) - addPoint.lng) / nCords
                 };
             }
 
@@ -140,7 +130,7 @@ function initMap() {
                 radius: RADIUS_SPAN
             });
 
-        } else if (n_cords == 1) {
+        } else if (nCords == 1) {
             centroid = addPoint;
             console.log("ONLY SINGLE COORDINATE ");
 
@@ -152,7 +142,6 @@ function initMap() {
     var geocoder = new google.maps.Geocoder;
 
 
-    // REVERSE GEOCODING
     function reverse_geocoding(point, markerR, posI) {
 
         geocoder.geocode({
@@ -186,9 +175,9 @@ function initMap() {
         });
     }
 
-    // DRAW MARKERS FOR MIDWAY & POINTS 
+
     function drawMarkers() {
-        for (i = 0; i < n_cords; i++) {
+        for (i = 0; i < nCords; i++) {
 
             var start = new google.maps.LatLng(placesData[i].cord.lat, placesData[i].cord.lng);
 
@@ -200,10 +189,9 @@ function initMap() {
             });
             reverse_geocoding(placesData[i].cord, cord_marker, i);
         }
-        // reverse_geocoding(centroid, centroidMarker);
     }
 
-    // SHOW ROUTE
+
     function showRoute() {
 
         var directionsDisplay;
@@ -220,7 +208,7 @@ function initMap() {
             });
         }
 
-        for (i = 0; i < n_cords; i++) {
+        for (i = 0; i < nCords; i++) {
             var start = new google.maps.LatLng(placesData[i].cord.lat, placesData[i].cord.lng);
             var end = new google.maps.LatLng(centroid.lat, centroid.lng);
 
@@ -242,9 +230,9 @@ function initMap() {
         }
     }
 
-    // PLACES SEARCH 
+
     function addNearbyServices() {
-        if (n_cords < 1)
+        if (nCords < 1)
             return;
         var service = new google.maps.places.PlacesService(map);
 
@@ -318,7 +306,7 @@ function initMap() {
     }
 
     function updateView(addPoint, centroid, isNewPoint) {
-        if (n_cords > 1) {
+        if (nCords > 1) {
             clearMap();
             getCentroid(addPoint, centroid, isNewPoint);
             showRoute();
@@ -339,17 +327,17 @@ function initMap() {
                 lng: objLocation.geometry.location.lng(),
             }
 
-            n_cords += 1;
+            nCords += 1;
 
             var obj = {
-                id: n_cords,
+                id: nCords,
                 cord: cord,
                 name: objLocation.formatted_address
             };
 
             placesData.push(obj);
 
-            if (n_cords == 1) {
+            if (nCords == 1) {
 
                 var newMarker = new google.maps.Marker({
                     position: cord,
@@ -366,31 +354,25 @@ function initMap() {
             console.log("LOCATION ADDED !");
             objLocation = null;
         } else {
-
             alert("📍 Enter a valid location");
         }
         locationInput.value = "";
     }
 
-    // ADDED PERSON & PUBLISH
     autocomplete_one.addListener('place_changed', e => {
         addPeople();
-
-        // PUBLISH DATA
         publish({
             placeDetails: placesData,
             polCentroid: centroid
         });
     })
 
-    // REMOVE ALL & PUBLISH
     remove_people.onclick = function () {
-        n_cords = 0;
+        nCords = 0;
         placesData = [];
 
         clearMap();
 
-        // PUBLISH DATA
         publish({
             placeDetails: placesData,
             polCentroid: centroid
@@ -399,14 +381,12 @@ function initMap() {
         location.reload();
     }
 
-    // CLOSE BAR
     CloseBar.onclick = function () {
         ResultBar.style.display = "none";
         CloseBar.style.display = "none";
         OpenBar.style.display = "";
     }
 
-    //OPEN BAR
     OpenBar.onclick = function () {
         ResultBar.style.display = "";
         CloseBar.style.display = "";
@@ -418,7 +398,7 @@ function initMap() {
         var people = document.getElementById("online_people"),
             li;
         people.innerHTML = '';
-        for (i = 0; i < n_cords; i++) {
+        for (i = 0; i < nCords; i++) {
             li = document.createElement("li");
 
             var name = placesData[i].name;
@@ -433,13 +413,12 @@ function initMap() {
             $(document).on('click', "#remove-me", function (e) {
 
                 var entry = $(this).parent();
-                var placeName = entry.text().substring(8),
-                    j;
+                var placeName = entry.text().substring(8);
                 entry.remove();
 
                 placeName = placeName.substring(1, placeName.length - 2);
 
-                for (j = 0; j < placesData.length; j++) {
+                for(var j = 0; j < placesData.length; j++) {
                     name = placesData[j].name;
 
                     if (name.length > 30) {
@@ -450,7 +429,7 @@ function initMap() {
                     if (name === placeName) {
                         var sub_cord = placesData[j].cord;
                         placesData.splice(j, 1);
-                        n_cords -= 1;
+                        nCords -= 1;
                         updateView(sub_cord, centroid, false);
                         publish({
                             placeDetails: placesData,
@@ -472,15 +451,15 @@ function initMap() {
         if (!data) {
             console.log("NO DATA")
         }
+
         placesData = data.placeDetails;
         centroid = data.polCentroid;
-        n_cords = placesData.length;
+        nCords = placesData.length;
 
-        console.log("PUBLISHED Data: ", data);
         updateView(centroid, centroid, false);
     }
 
-    /* PUBNUB */
+
     pubnub.subscribe({
         channel: channelName,
         callback: publishedData,
