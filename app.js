@@ -83,8 +83,8 @@ function initMap() {
 
 
     function getCentroid(addPoint, centroidX, isNewPoint) {
-        // nCords >= 2 ; else show markeds on self and no further rendering 
-        // render on addition [ cords.length ] 
+        // nCords >= 2 ; else show markeds on self and no further rendering
+        // render on addition [ cords.length ]
 
         if (nCords > 1) {
 
@@ -100,7 +100,7 @@ function initMap() {
                 };
             }
 
-            // BIND PLACES AND DRAW BORDER 
+            // BIND PLACES AND DRAW BORDER
             centroidMarker = new google.maps.Marker({
                 position: centroid,
                 map: map,
@@ -366,7 +366,36 @@ function initMap() {
             polCentroid: centroid
         });
     })
+    document.getElementById("get-current-location").addEventListener("click",function() {
+      if(navigator.geolocation)
+      {
 
+        navigator.geolocation.getCurrentPosition(function(position){
+        var  pos={
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+        geocoder.geocode({'location':pos},function(result,status){
+          if(status==='OK'){
+            objLocation=result[0];
+            console.log(result[0])
+            addPeople();
+            publish({
+                placeDetails: placesData,
+                polCentroid: centroid
+            });
+          }
+          else {
+            console.log("Cannot get place with respect to current location.");
+          }
+        })
+                });
+      }
+      else {
+        window.alert("Cannot get current location.");
+      }
+    })
     remove_people.onclick = function () {
         nCords = 0;
         placesData = [];

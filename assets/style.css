@@ -201,7 +201,23 @@ a {
 .github-corner:hover .octo-arm {
     animation: octocat-wave 560ms ease-in-out;
 }
-
+.current-button{
+  text-align: center;
+  margin: 10px;
+}
+.get-current-location{
+  border: 2px solid #36516d;
+  background-color: #ffffff;
+  color:#36516d;
+  height: 35px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.get-current-location:hover{
+  background-color: #36516d;
+  color:#ffffff;
+}
 @keyframes octocat-wave {
 
     0%,
