@@ -158,6 +158,17 @@ a {
     padding: 20px;
 }
 
+.share-people-btn {
+  font-size: 12px;
+  display: flex;
+  color: #8093a6;
+  align-items: center;
+}
+
+.share-people-btn i {
+  font-size: 16px;
+}
+
 .viewerCount {
     -webkit-transition: all 0.5s;
     transition: all 0.5s;

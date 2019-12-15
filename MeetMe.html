@@ -44,6 +44,9 @@
                 <a id="remove_people" class="remove-people-btn mb-4 pl-1">
                     Clear All
                 </a>
+                <a id="share_people" class="share-people-btn mb-4 pl-1" onclick="Copy_url();" >
+                   <i class="material-icons">share</i>
+                </a>
                 <div class="input-field">
                     <input type="text" id="autocomplete-input" class="autocomplete form-control form-control-sm" />
                 </div>
@@ -57,6 +60,18 @@
 
     <script>
         var showHistory = true;
+        function Copy_url() 
+        {
+           var dummy = document.createElement('input'),
+           text = window.location.href;
+
+           document.body.appendChild(dummy);
+           dummy.value = text;
+           dummy.select();
+           document.execCommand('copy');
+           document.body.removeChild(dummy);
+            console.log("link copied");
+        }
     </script>
 
     <script src="https://cdn.pubnub.com/pubnub-3.14.1.min.js"></script>
