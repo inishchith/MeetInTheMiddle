@@ -398,6 +398,10 @@ function initMap() {
     })
     remove_people.onclick = function () {
         nCords = 0;
+        $('#remove-me').each(function(i, obj) {
+            var entry = $(this).parent();;
+            entry.remove();
+        });
         placesData = [];
 
         clearMap();
