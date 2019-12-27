@@ -39,7 +39,7 @@
 
 ### Contributions
 
-- Feel free to open issues and suggest ideas to improve.
+- Feel free to open [new-issues](https://github.com/inishchith/MeetInTheMiddle/issues/new) and suggest ideas to improve.
 
 #### Recognition
 
