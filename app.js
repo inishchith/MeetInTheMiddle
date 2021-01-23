@@ -379,7 +379,6 @@ function initMap() {
         geocoder.geocode({'location':pos},function(result,status){
           if(status==='OK'){
             objLocation=result[0];
-            console.log(result[0])
             addPeople();
             publish({
                 placeDetails: placesData,

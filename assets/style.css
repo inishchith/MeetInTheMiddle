@@ -35,7 +35,7 @@ html {
 }
 
 .side-box-content {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 40px 40px 10px 10px;
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
     height: 100%;
@@ -63,12 +63,13 @@ html {
     margin: 20px 0;
     padding-left: 17px;
     text-align: left;
-    color: #8093a6;
+    /* color: #8093a6; */
+    font-weight: bold;
     font-size: 15px;
 }
 
 .instructions li {
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
 .footer {
