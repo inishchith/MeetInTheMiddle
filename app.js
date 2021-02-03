@@ -351,7 +351,7 @@ function initMap() {
                 updateView(cord, centroid, true);
             }
 
-            console.log("LOCATION ADDED !");
+            console.log("LOCATION ADDED!");
             objLocation = null;
         } else {
             alert("📍 Enter a valid location");
