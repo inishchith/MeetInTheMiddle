@@ -1,4 +1,4 @@
-var channelName = location.search.split('username=')[1]
+var channelName = location.search.split('id=')[1]
 if (!channelName) {
     alert("REDIRECTING... ")
     history.go(-1)

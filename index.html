@@ -2,9 +2,22 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="index, follow">
+	<meta name="description" content="Meet your friends Midway!">
+	<meta name="author" content="Nishchith Shetty">
+	<meta name="twitter:creator" content="@inishchith">
+	<meta name="twitter:url" content="https://nishchith.com/">
+	<meta name="twitter:site" content="@inishchith" />
+	<meta name="twitter:description" content="Computer Programmer" />
+
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:title" content="">
+	<meta property="og:description" content="Meet your friends Midway!">
+    <meta name="theme-color" content="#2196f3" />
+
     <title> Meet In The Middle </title>
     <link rel="shortcut icon" type="image/icon" href="./assets/icons/favicon.ico" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
@@ -23,7 +36,7 @@
 
             <h1 class="side-box__title d-flex flex-column flex-sm-row">
                 <span class="order-sm-0 order-1">Meet In</span>
-                <img src="./assets/icons/location.svg" class="side-box__title__icon">
+                <img alt="Location Icon" src="./assets/icons/location.svg" class="side-box__title__icon">
                 <span class="order-3">the Middle</span>
             </h1>
             <ol class="instructions">
@@ -32,6 +45,7 @@
                 <li>Find the place to meet</li>
             </ol>
             <form class="input-group" id="group-name-form">
+                <label for="group_name"></label>
                 <input type="text" id="group_name" autofocus class="form-control form-control-padded" placeholder="Name the group">
                 <div class="input-group-append">
                     <button class="btn btn-danger px-4" type="submit" id="submit">
@@ -84,7 +98,7 @@
             }
 
             var groupID = genGroupID(groupName);
-            window.location = './MeetMe.html?username=' + groupID;
+            window.location = './MeetMe.html?id=' + groupID;
         })
     </script>
     <!-- Cloudflare Web Analytics -->
