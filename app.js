@@ -63,16 +63,16 @@ function initMap() {
 
     var nCords = 0,
         centroid = [],
-        centroidMarker;
+        centroidMarker,
+        objLocation;
 
-    var remove_people = document.getElementById('remove_people'),
+    var clear_all = document.getElementById('clear_all'),
         OpenBar = document.getElementById('Open'),
         CloseBar = document.getElementById('Close'),
         ResultBar = document.getElementById('ResultBar'),
         locationInput = document.getElementById('autocomplete-input'),
         autocomplete_one = new google.maps.places.Autocomplete(locationInput);
 
-    var objLocation;
     google.maps.event.addListener(autocomplete_one, 'place_changed', function () {
         objLocation = autocomplete_one.getPlace();
     });
@@ -170,7 +170,7 @@ function initMap() {
                     console.log('NO RESULT FOUND');
                 }
             } else {
-                debug(" Geocoder status:" + status);
+                debug("Geocoder status: " + status);
             }
         });
     }
@@ -224,7 +224,7 @@ function initMap() {
                     renderRoute(response);
                 } else {
                     console.log("Directions Request From " + start.toUrlValue(6) + " to " + end.toUrlValue(6) + " failed: " + status);
-                    debug(" Directions Status:" + status);
+                    debug("Directions Status: " + status);
                 }
             });
         }
@@ -291,7 +291,7 @@ function initMap() {
                     createMarker(results[i]);
                 }
             } else {
-                debug(" PlacesServices status:" + status);
+                debug("PlacesServices status: " + status);
             }
         }
 
@@ -366,6 +366,7 @@ function initMap() {
             polCentroid: centroid
         });
     })
+
     document.getElementById("get-current-location").addEventListener("click",function() {
       if(navigator.geolocation)
       {
@@ -395,36 +396,6 @@ function initMap() {
         window.alert("Cannot get current location.");
       }
     })
-    remove_people.onclick = function () {
-        nCords = 0;
-        $('#remove-me').each(function(i, obj) {
-            var entry = $(this).parent();;
-            entry.remove();
-        });
-        placesData = [];
-
-        clearMap();
-
-        publish({
-            placeDetails: placesData,
-            polCentroid: centroid
-        });
-
-        location.reload();
-    }
-
-    CloseBar.onclick = function () {
-        ResultBar.style.display = "none";
-        CloseBar.style.display = "none";
-        OpenBar.style.display = "";
-    }
-
-    OpenBar.onclick = function () {
-        ResultBar.style.display = "";
-        CloseBar.style.display = "";
-        OpenBar.style.display = "none";
-    }
-
 
     function showPeople() {
         var people = document.getElementById("online_people"),
@@ -491,7 +462,6 @@ function initMap() {
         updateView(centroid, centroid, false);
     }
 
-
     pubnub.subscribe({
         channel: channelName,
         callback: publishedData,
@@ -515,13 +485,43 @@ function initMap() {
         });
     }
 
-    if (showHistory) {
-        pubnub.history({
-            channel: channelName,
-            count: 1,
-            callback: function (messages) {
-                pubnub.each(messages[0], publishedData);
-            }
+    pubnub.history({
+        channel: channelName,
+        count: 1,
+        callback: function (messages) {
+            pubnub.each(messages[0], publishedData);
+        }
+    });
+
+
+    // DOM EVENTS
+    clear_all.onclick = function () {
+        nCords = 0;
+        $('#remove-me').each(function(i, obj) {
+            var entry = $(this).parent();;
+            entry.remove();
         });
+        placesData = [];
+
+        clearMap();
+
+        publish({
+            placeDetails: placesData,
+            polCentroid: centroid
+        });
+
+        location.reload();
+    }
+
+    CloseBar.onclick = function () {
+        ResultBar.style.display = "none";
+        CloseBar.style.display = "none";
+        OpenBar.style.display = "";
+    }
+
+    OpenBar.onclick = function () {
+        ResultBar.style.display = "";
+        CloseBar.style.display = "";
+        OpenBar.style.display = "none";
     }
 }
