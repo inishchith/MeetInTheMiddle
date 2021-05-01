@@ -22,7 +22,7 @@ html {
     position: fixed;
     width: 100%;
     height: 100%;
-    opacity: 0.5;
+    opacity: 0.6;
     background: url(./grain.png);
 }
 
@@ -35,7 +35,7 @@ html {
 }
 
 .side-box-content {
-    background-color: #fff;
+    background-color:#8093a6;
     border-radius: 40px 40px 10px 10px;
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
     height: 100%;
@@ -44,7 +44,7 @@ html {
     justify-content: center;
     padding: 30px;
     position: relative;
-    padding-bottom: 60px;
+    padding-bottom: 40px;
 }
 
 .side-box__title {
@@ -76,21 +76,21 @@ html {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 20px 30px;
+    padding: 28px 35px;
 }
 
 /* ******************* */
 /* Bootstrap ovverides */
 /* ******************* */
 .form-control-padded {
-    padding: 23px 15px;
+    padding: 26px 18px;
 }
 
 .card {
-    border-radius: 10px;
+    border-radius: 15px;
     border: none;
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1), 0 2px 5px 0 rgba(0, 0, 0, 0.15);
-    z-index: 10;
+    z-index: 9;
 }
 
 .card-header {
@@ -140,7 +140,7 @@ a {
 }
 
 .toggle-btn i {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .remove-people-btn {
@@ -249,7 +249,7 @@ a {
 
 @media (max-width: 500px) {
     .github-corner:hover .octo-arm {
-        animation: none;
+        animation:forwards;
     }
 
     .github-corner .octo-arm {
